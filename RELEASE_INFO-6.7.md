@@ -10,6 +10,12 @@ Filtered product listings show a variant product's main variant only if it match
 
 Extensions that replace the preview resolution via `LoadPreviewExtension` can read the active post filters from the new `postFilters` property to apply the same rule.
 
+### Dynamic product groups show the main variant only if it belongs to the group
+
+Category listings and cross-sellings based on a dynamic product group show a variant product's main variant only if it matches the group's conditions. Otherwise, a variant of the group is shown. This also applies to groups that select specific variants and to filters that extensions add to a listing. Products configured to display their parent still show the parent.
+
+Extensions that replace the preview resolution via `LoadPreviewExtension` can read these filters from the new `filters` property.
+
 ### `JsonField` supports typed properties with additional extension data
 
 `JsonField` accepts the new `allowAdditionalProperties: true` constructor argument. Use it for a JSON field with stable, mapped properties whose types should be validated while extension-owned keys must remain writable:
