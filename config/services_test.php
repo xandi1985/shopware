@@ -9,10 +9,12 @@ use Shopware\Core\Framework\Telemetry\Metrics\Config\TransportConfigProvider;
 use Shopware\Core\Framework\Telemetry\Metrics\Transport\TransportCollection;
 use Shopware\Core\Framework\Test\DataAbstractionLayer\Field\TestDefinition\CalculatedPriceFieldTestDefinition;
 use Shopware\Core\Framework\Test\Telemetry\Factory\TraceableTransportFactory;
+use Shopware\Core\Framework\Util\Host;
 use Shopware\Core\System\SalesChannel\Context\SalesChannelContextFactory;
 use Shopware\Tests\Integration\Core\Content\Seo\SalesChannel\FixturesPhp\StoreApiSeoResolverTestRoute;
 use Shopware\Tests\Integration\Core\Framework\Api\EventListener\FixturesPhp\SalesChannelAuthenticationListenerTestRoute;
 use Shopware\Tests\Integration\Core\Framework\App\AppFixture;
+use Shopware\Tests\Integration\Core\Framework\App\PrivateHost;
 use Shopware\Tests\Integration\Core\Framework\DataAbstractionLayer\fixture\AttributeEntity;
 use Shopware\Tests\Integration\Core\Framework\DataAbstractionLayer\fixture\AttributeEntityAgg;
 use Shopware\Tests\Integration\Core\Framework\DataAbstractionLayer\fixture\AttributeEntityWithHydrator;
@@ -91,6 +93,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->args([
             service('service_container'),
         ]);
+
+    $services->set(Host::class, PrivateHost::class);
 
     $services->set(AppFixture::class)
         ->public()

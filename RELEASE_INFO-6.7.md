@@ -363,6 +363,12 @@ The combined `checkout.confirmTermsTextModalWithGuarantee` snippet was replaced 
 
 Shopware now follows a `301` or `302` from an app endpoint without dropping the `POST` method, the request body or the `shopware-shop-signature` header, so the redirect target receives the same signed request.
 
+### App registration requires a verified `APP_URL`
+
+Shopware now verifies `APP_URL` before it registers the shop with an app server that is reachable over the internet, such as the Shopware service registry. This applies in every environment, to app installations, re-registrations and the `reinstall-apps` and `move-shop-permanently` shop ID change strategies. App servers with a private or loopback address, such as a local development setup, are not affected. When the verification fails, the registration is aborted with `APP_URL "<url>" is incorrect or does not reach this installation (<reason>)` instead of registering the shop under an address that does not reach it.
+
+`APP_URL` must use `https` and reach this installation. Timeouts, connection errors and server errors abort the registration as well. Every registration verifies it again instead of relying on a previous result, which might have been copied along with the installation. Run `bin/console app:url:verify` to check the configuration and see why a verification failed.
+
 # 6.7.15.0
 
 ## Features

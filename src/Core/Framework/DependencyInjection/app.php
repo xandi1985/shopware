@@ -166,6 +166,7 @@ use Shopware\Core\Framework\Store\Services\AbstractStoreAppLifecycleService;
 use Shopware\Core\Framework\Store\Services\ExtensionDownloader;
 use Shopware\Core\Framework\Store\Services\StoreClient;
 use Shopware\Core\Framework\Telemetry\Metrics\Meter;
+use Shopware\Core\Framework\Util\Host;
 use Shopware\Core\Framework\Webhook\Authorization\Policy\PolicyRegistry;
 use Shopware\Core\Framework\Webhook\BusinessEventEncoder;
 use Shopware\Core\Framework\Webhook\Hookable\HookableEventCollector;
@@ -534,7 +535,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             service(StoreClient::class),
             param('kernel.shopware_version'),
             service(ClockInterface::class),
+            service(AppUrlVerifier::class),
+            service(Host::class),
         ]);
+
+    $services->set(Host::class);
 
     $services->set(AppManager::class)
         ->args([
