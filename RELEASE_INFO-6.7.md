@@ -1,4 +1,3 @@
-# 6.7.15.0 (upcoming)
 # 6.7.16.0 (upcoming)
 
 ## Features
